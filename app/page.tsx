@@ -1,7 +1,11 @@
+import { Navbar } from "./components";
 
 
 export default function Home() {
   return (
-    <h1>Hello Next.JS</h1>
+    <Navbar>
+      <h1>Welcome to the homepage</h1>
+      <p>Content of your homepage goes here.</p>
+    </Navbar>
   )
 }
