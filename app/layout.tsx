@@ -4,7 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import './globals.css'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-const queryClient = new QueryClient()
+
+const queryClient = new QueryClient();
 
 export const metadata = {
   title: 'Car Logs',
