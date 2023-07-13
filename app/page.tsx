@@ -1,25 +1,25 @@
 "use client";
 
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 // import { Navbar } from "./components";
 import axios from "axios";
-import { ITransactionResponse } from "./interfaces/transaction.interface";
+// import { ICarsResponse } from "./interfaces/cars.interface";
+import { useFetchCars } from "./hooks/useFetchCars.hook";
 
 
 export default function Home() {
-  async function fetchTransactions(): Promise<ITransactionResponse> {
-    const response = await axios.get('http://jsonplaceholder.typicode.com/users')
-    return response.data
-  }
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['transaction'],
-    queryFn: fetchTransactions
-  })
+  const { data, isLoading, isError, error } = useFetchCars()
+  if (isLoading) return <h2>Loading...</h2>
+  if (isError) return `${error}`
+
   return (
     <div>
-      {isLoading && <p>Loading...</p>}
-      <h3 style={{ color: 'black' }}>{data?.id} - {data?.username}</h3>
+      {data?.data.map((car, idx) => (
+        <div key={idx}>
+          <p>{car.city_mpg}</p>
+        </div>
+      ))}
     </div>
   )
 }
